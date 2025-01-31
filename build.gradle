@@ -1,0 +1,40 @@
+plugins {
+    id 'java-library'
+}
+
+group 'github.com.kadehar'
+version '1.0'
+
+def jacksonVersion = '2.15.1'
+def junitVersion = '5.11.4'
+def assertjVersion = '3.27.0'
+def fakerVersion = '1.0.2'
+def ownerVersion = '1.0.12'
+def postgresqlVersion = '42.7.5'
+def restAssuredVersion = '5.5.0'
+
+repositories {
+    mavenCentral()
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
+
+dependencies {
+    testImplementation (
+            "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion",
+            "org.junit.jupiter:junit-jupiter:$junitVersion",
+            "org.assertj:assertj-core:$assertjVersion",
+            "com.github.javafaker:javafaker:$fakerVersion",
+            "org.aeonbits.owner:owner:$ownerVersion",
+            "org.postgresql:postgresql:$postgresqlVersion",
+            "io.rest-assured:rest-assured:$restAssuredVersion",
+            "io.rest-assured:json-schema-validator:$restAssuredVersion"
+    )
+}
+
+tasks.test {
+    useJUnitPlatform()
+    systemProperties(System.getProperties())
+}

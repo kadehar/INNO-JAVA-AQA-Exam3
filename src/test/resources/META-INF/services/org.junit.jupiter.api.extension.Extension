@@ -1,0 +1,2 @@
+com.github.kadehar.inno.jupiter.extension.DatabasesExtension
+com.github.kadehar.inno.jupiter.extension.TestMethodContextExtension
