@@ -168,7 +168,8 @@ public class EmployeeContractTests {
                                 .extract().response();
         // @formatter:on
         TearDownEmployeeExtension.setEmployeeId(response.jsonPath().getLong("id"));
-        response.then().body(matchesJsonSchemaInClasspath("create-employee-schema.json"));
+        response.then()
+                .body(matchesJsonSchemaInClasspath("schema/create-employee-schema.json"));
     }
 
     @Test
@@ -184,7 +185,7 @@ public class EmployeeContractTests {
             .get(EndpointPath.employee() + "/{id}", employee.id())
         .then()
             .spec(baseResponseSpecification())
-            .body(matchesJsonSchemaInClasspath("employee-schema.json"));
+            .body(matchesJsonSchemaInClasspath("schema/employee-schema.json"));
         // @formatter:on
     }
 
@@ -204,7 +205,7 @@ public class EmployeeContractTests {
             .get(EndpointPath.employee())
         .then()
             .spec(baseResponseSpecification())
-            .body(matchesJsonSchemaInClasspath("get-employees-schema.json"));
+            .body(matchesJsonSchemaInClasspath("schema/get-employees-schema.json"));
         // @formatter:on
     }
 
@@ -223,7 +224,7 @@ public class EmployeeContractTests {
             .patch(EndpointPath.employee() + "/{id}", employeeWithNewPhone.id())
         .then()
             .spec(baseResponseSpecification())
-            .body(matchesJsonSchemaInClasspath("employee-schema.json"));
+            .body(matchesJsonSchemaInClasspath("schema/employee-schema.json"));
         // @formatter:on
     }
 }
