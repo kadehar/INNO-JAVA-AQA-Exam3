@@ -7,7 +7,7 @@ import com.github.kadehar.inno.jupiter.annotation.ApiLogin;
 import com.github.kadehar.inno.jupiter.annotation.WithEmployee;
 import com.github.kadehar.inno.jupiter.annotation.WithPreconditions;
 import com.github.kadehar.inno.jupiter.extension.PreconditionsExtension;
-import com.github.kadehar.inno.utils.RandomDataUtils;
+import com.github.kadehar.inno.utils.EmployeeUpdater;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -53,18 +53,7 @@ public class EmployeeBusinessTests {
     @WithEmployee
     @DisplayName("Can update employee information")
     void canUpdateEmployeeData(EmployeeJson employee) {
-        EmployeeJson employeeWithNewPhone = new EmployeeJson(
-                employee.id(),
-                employee.firstName(),
-                employee.lastName(),
-                employee.middleName(),
-                PreconditionsExtension.getCompanyId(),
-                employee.email(),
-                employee.url(),
-                RandomDataUtils.randomPhone(),
-                employee.birthDate(),
-                employee.active()
-        );
+        EmployeeJson employeeWithNewPhone = EmployeeUpdater.updateEmployeePhone(employee);
         EmployeeJson updatedEmployee = employeeApi.update(employeeWithNewPhone);
         assertThat(employeeWithNewPhone).isEqualTo(updatedEmployee);
     }
