@@ -28,4 +28,63 @@ public record EmployeeJson(
         @JsonProperty("isActive")
         Boolean active
 ) {
+    public EmployeeJson withId(Long newId) {
+        return new EmployeeJson(
+                newId,
+                firstName(),
+                lastName(),
+                middleName(),
+                companyId(),
+                email(),
+                url(),
+                phone(),
+                birthDate(),
+                active()
+        );
+    }
+
+    public EmployeeJson withUrl(String newUrl) {
+        return new EmployeeJson(
+                id(),
+                firstName(),
+                lastName(),
+                middleName(),
+                companyId(),
+                email(),
+                newUrl,
+                phone(),
+                birthDate(),
+                active()
+        );
+    }
+
+    public EmployeeJson withEmail(String newEmail) {
+        return new EmployeeJson(
+                id(),
+                firstName(),
+                lastName(),
+                middleName(),
+                companyId(),
+                newEmail,
+                url(),
+                phone(),
+                birthDate(),
+                active()
+        );
+    }
+
+    public EmployeeJson withPhone(String newPhone) {
+        return new EmployeeJson(
+                id(),
+                firstName(),
+                lastName(),
+                middleName(),
+                companyId(),
+                email(),
+                url(),
+                newPhone,
+                birthDate(),
+                active()
+        );
+    }
 }

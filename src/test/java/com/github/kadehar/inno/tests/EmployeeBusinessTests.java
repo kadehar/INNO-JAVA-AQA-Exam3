@@ -53,7 +53,7 @@ public class EmployeeBusinessTests {
     @WithEmployee
     @DisplayName("Can update employee information")
     void canUpdateEmployeeData(EmployeeJson employee) {
-        EmployeeJson employeeWithNewPhone = EmployeeUpdater.updateEmployeePhone(employee);
+        EmployeeJson employeeWithNewPhone = EmployeeUpdater.update(employee, EmployeeUpdater.Field.PHONE);
         EmployeeJson updatedEmployee = employeeApi.update(employeeWithNewPhone);
         assertThat(employeeWithNewPhone).isEqualTo(updatedEmployee);
     }

@@ -4,11 +4,9 @@ import com.github.kadehar.inno.api.model.EmployeeJson;
 import com.github.kadehar.inno.api.service.EmployeeApi;
 import com.github.kadehar.inno.api.service.impl.EmployeeApiImpl;
 import com.github.kadehar.inno.db.service.EmployeeDbClient;
+import com.github.kadehar.inno.utils.EmployeeCreator;
 import com.github.kadehar.inno.utils.Key;
-import com.github.kadehar.inno.utils.RandomDataUtils;
 import org.junit.jupiter.api.extension.*;
-
-import java.time.LocalDate;
 
 public class EmployeeExtension implements ParameterResolver, BeforeEachCallback, AfterEachCallback {
 
@@ -19,33 +17,10 @@ public class EmployeeExtension implements ParameterResolver, BeforeEachCallback,
 
     @Override
     public void beforeEach(ExtensionContext context) {
-        EmployeeJson employeeJson = new EmployeeJson(
-            null,
-                RandomDataUtils.randomFirstName(),
-                RandomDataUtils.randomLastName(),
-                RandomDataUtils.randomMiddleName(),
-                PreconditionsExtension.getCompanyId(),
-                RandomDataUtils.randomEmail(),
-                RandomDataUtils.randomUrl(),
-                RandomDataUtils.randomPhone(),
-                LocalDate.now().minusYears(30).toString(),
-                true
-        );
+        EmployeeJson employeeJson = EmployeeCreator.newEmployee();
         Long employeeId = employeeApi.create(employeeJson);
         setEmployeeId(employeeId);
-        EmployeeJson savedEmployee = new EmployeeJson(
-                employeeId,
-                employeeJson.firstName(),
-                employeeJson.lastName(),
-                employeeJson.middleName(),
-                employeeJson.companyId(),
-                employeeJson.email(),
-                employeeJson.url(),
-                employeeJson.phone(),
-                employeeJson.birthDate(),
-                employeeJson.active()
-        );
-        setEmployee(savedEmployee);
+        setEmployee(employeeJson.withId(employeeId));
     }
 
     @Override

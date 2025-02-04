@@ -118,13 +118,13 @@ public class EmployeeContractTests {
     @WithEmployee
     @DisplayName("Code 201 when update employee's phone")
     void code201WhenEmployeeIsUpdated(EmployeeJson employeeJson) {
-        EmployeeJson employeeWithNewPhone = EmployeeUpdater.updateEmployeePhone(employeeJson);
+        EmployeeJson employeeWithNewUrl = EmployeeUpdater.update(employeeJson, EmployeeUpdater.Field.URL);
         // @formatter:off
         given()
             .spec(authSpecification())
-            .body(employeeWithNewPhone)
+            .body(employeeWithNewUrl)
         .when()
-            .patch(EndpointPath.employee() + "/{id}", employeeWithNewPhone.id())
+            .patch(EndpointPath.employee() + "/{id}", employeeWithNewUrl.id())
         .then()
             .spec(baseResponseSpecification())
             .statusCode(201);
@@ -137,11 +137,11 @@ public class EmployeeContractTests {
     @WithEmployee
     @DisplayName("Code 404 if employee is not found while update")
     void code404IfEmployeeIsNotFoundWhileUpdate(EmployeeJson employeeJson) {
-        EmployeeJson employeeWithNewPhone = EmployeeUpdater.updateEmployeePhone(employeeJson);
+        EmployeeJson employeeWithNewEmail = EmployeeUpdater.update(employeeJson, EmployeeUpdater.Field.EMAIL);
         // @formatter:off
         given()
             .spec(authSpecification())
-            .body(employeeWithNewPhone)
+            .body(employeeWithNewEmail)
         .when()
             .patch(EndpointPath.employee() + "/{id}", 0)
         .then()
@@ -215,7 +215,7 @@ public class EmployeeContractTests {
     @WithEmployee
     @DisplayName("Update employee response body is correct")
     void checkUpdateEmployeeBodyWithValidator(EmployeeJson employeeJson) {
-        EmployeeJson employeeWithNewPhone = EmployeeUpdater.updateEmployeePhone(employeeJson);
+        EmployeeJson employeeWithNewPhone = EmployeeUpdater.update(employeeJson, EmployeeUpdater.Field.PHONE);
         // @formatter:off
         given()
             .spec(authSpecification())
