@@ -1,3 +1,10 @@
-# INNO-JAVA-AQA-Exam3
+# Промежуточная аттестация
 
-Добавь сюда задание к экзамену по аналогии с Exam2 когда откроется доступ
+### Задания
+
+Напишите автотесты на API сервиса x-clients, модуль employee
+
+### Реквизиты
+
+- URL: https://x-clients-be.onrender.com
+- Swagger: https://x-clients-be.onrender.com/docs/#/
